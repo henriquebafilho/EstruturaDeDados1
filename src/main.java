@@ -3,15 +3,23 @@ import java.util.*;
 public class main {
 
 	public static void main(String[] args) {
-		Scanner entrada = new Scanner(System.in);
-		String frase;
-		
-		System.out.println("Insira uma frase: ");
-		frase = entrada.nextLine();
 
-		//pilha.adicionapilha(frase);
+		PilhaGenerica pilha = new PilhaGenerica(5);
+		PilhaGenerica p = new PilhaGenerica(5);
+
+		pilha.push('p');
+		pilha.push('i');
+		pilha.push('l');
+		pilha.push('h');
+		pilha.push('a');
+
+		// 1) a. i. 
+		//p.transferePilha(pilha);
+
+		// 1) a. ii.
+		//p.transferePilhaRecursivo(pilha);
 		
-		
+		//System.out.println(p.retornaVetor());
 	}
 
 }
