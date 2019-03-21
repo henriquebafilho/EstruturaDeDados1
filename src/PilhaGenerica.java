@@ -61,8 +61,9 @@ public class PilhaGenerica<T> {
 
 	// 1) a. i.
 	public void transferePilha(PilhaGenerica<T> p) {
-		if (!this.vazia()) {
+		if (!p.vazia()) {
 			PilhaGenerica<T> pilhaAux = new PilhaGenerica<>(p.getTamanho());
+
 			while (!p.vazia()) {
 				pilhaAux.push(p.pop());
 			}
@@ -82,6 +83,10 @@ public class PilhaGenerica<T> {
 
 	// 1) b
 	public void revertePilha() {
-
+		PilhaGenerica<T> auxiliar = new PilhaGenerica<>(this.n);
+		while (!this.vazia()) {
+			auxiliar.push(this.pop());
+		}
+		System.out.println("Pilha invertida: " + auxiliar.getVetor());
 	}
 }

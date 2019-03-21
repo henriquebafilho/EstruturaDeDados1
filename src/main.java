@@ -14,15 +14,14 @@ public class main {
 		pilha1.push('a');
 
 		// 1) a. i. 
-		pilha2.transferePilha(pilha1);
+		//pilha2.transferePilha(pilha1);
 
 		// 1) a. ii.
 		//pilha2.transferePilhaRecursivo(pilha1);
 		
 		// 1) b.
-		//pilha2.revertePilha();
+		pilha1.revertePilha();
 		
-		System.out.println(pilha2.getVetor());
 	}
 
 }
