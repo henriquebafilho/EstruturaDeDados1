@@ -51,27 +51,37 @@ public class PilhaGenerica<T> {
 			return false;
 	}
 
-	public Vector<T> retornaVetor(){
+	public Vector<T> getVetor() {
 		return vetor;
 	}
-	
+
+	public int getTamanho() {
+		return n;
+	}
+
 	// 1) a. i.
 	public void transferePilha(PilhaGenerica<T> p) {
-		while (!p.vazia()) {
-			this.push(p.pop());
+		if (!this.vazia()) {
+			PilhaGenerica<T> pilhaAux = new PilhaGenerica<>(p.getTamanho());
+			while (!p.vazia()) {
+				pilhaAux.push(p.pop());
+			}
+			while (!pilhaAux.vazia()) {
+				p.push(pilhaAux.pop());
+			}
 		}
 	}
 
 	// 1) a. ii.
 	public void transferePilhaRecursivo(PilhaGenerica<T> p) {
-		if(!p.vazia()) {
+		if (!p.vazia()) {
 			this.push(p.pop());
 			transferePilhaRecursivo(p);
 		}
 	}
-	
+
 	// 1) b
 	public void revertePilha() {
-		
+
 	}
 }

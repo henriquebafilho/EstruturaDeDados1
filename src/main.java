@@ -4,22 +4,25 @@ public class main {
 
 	public static void main(String[] args) {
 
-		PilhaGenerica pilha = new PilhaGenerica(5);
-		PilhaGenerica p = new PilhaGenerica(5);
+		PilhaGenerica pilha1 = new PilhaGenerica(5);
+		PilhaGenerica pilha2 = new PilhaGenerica(5);
 
-		pilha.push('p');
-		pilha.push('i');
-		pilha.push('l');
-		pilha.push('h');
-		pilha.push('a');
+		pilha1.push('p');
+		pilha1.push('i');
+		pilha1.push('l');
+		pilha1.push('h');
+		pilha1.push('a');
 
 		// 1) a. i. 
-		//p.transferePilha(pilha);
+		pilha2.transferePilha(pilha1);
 
 		// 1) a. ii.
-		//p.transferePilhaRecursivo(pilha);
+		//pilha2.transferePilhaRecursivo(pilha1);
 		
-		//System.out.println(p.retornaVetor());
+		// 1) b.
+		//pilha2.revertePilha();
+		
+		System.out.println(pilha2.getVetor());
 	}
 
 }
