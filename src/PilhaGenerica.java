@@ -71,7 +71,11 @@ public class PilhaGenerica<T> {
 				pilhaSecundaria.push(letra);
 			}
 			pilhaPrincipal.push(pilhaSecundaria);
+			
+			//mostra as pilhas secundárias com as palavras separadas pro letras
+			System.out.println(pilhaSecundaria.getVetor());
 		}
+		//mostra a pilha principal, cujos elementos são pilhas secundárias
 		System.out.println(pilhaPrincipal.getVetor());
 	}
 

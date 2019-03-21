@@ -12,8 +12,7 @@ public class main {
 		PilhaGenerica pilha = new PilhaGenerica(frase.length());
 		
 		pilha.armazenaTexto(frase);
-		
-		
+		System.out.println(pilha.retornaTextoOriginal());
 		
 	}
 
