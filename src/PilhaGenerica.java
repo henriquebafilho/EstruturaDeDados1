@@ -4,13 +4,15 @@ public class PilhaGenerica<T> {
 	private int n;
 	private Vector<T> vetor;
 	private int topo;
-	private Vector<T> pilhaPrincipal;
-	private Vector<String> pilhaSecundaria;
 
 	public PilhaGenerica(int tamanho) {
 		n = tamanho;
 		vetor = new Vector<T>(tamanho);
 		topo = -1;
+	}
+
+	public Vector<T> getVetor() {
+		return vetor;
 	}
 
 	public boolean vazia() {
@@ -54,7 +56,23 @@ public class PilhaGenerica<T> {
 	}
 
 	public void armazenaTexto(String texto) {
-		
+		PilhaGenerica<PilhaGenerica> pilhaPrincipal = new PilhaGenerica<>(texto.length());
+
+		String[] palavras = texto.split(" ");
+
+		for (int i = 0; i < palavras.length; i++) {
+			PilhaGenerica<String> pilhaSecundaria = new PilhaGenerica<>(texto.length());
+			while (!pilhaSecundaria.vazia()) {
+				pilhaSecundaria.pop();
+			}
+			char[] letras = palavras[i].toCharArray();
+			for (char aux : letras) {
+				String letra = Character.toString(aux);
+				pilhaSecundaria.push(letra);
+			}
+			pilhaPrincipal.push(pilhaSecundaria);
+		}
+		System.out.println(pilhaPrincipal.getVetor());
 	}
 
 	public String retornaTextoOriginal() {
