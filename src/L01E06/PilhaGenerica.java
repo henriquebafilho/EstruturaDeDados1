@@ -1,3 +1,5 @@
+package L01E06;
+
 import java.util.Vector;
 
 public class PilhaGenerica<T> {
