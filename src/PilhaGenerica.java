@@ -4,6 +4,8 @@ public class PilhaGenerica<T> {
 	private int n;
 	private Vector<T> vetor;
 	private int topo;
+	private Vector<T> pilhaPrincipal;
+	private Vector<String> pilhaSecundaria;
 
 	public PilhaGenerica(int tamanho) {
 		n = tamanho;
@@ -51,42 +53,15 @@ public class PilhaGenerica<T> {
 			return false;
 	}
 
-	public Vector<T> getVetor() {
-		return vetor;
+	public void armazenaTexto(String texto) {
+		
 	}
 
-	public int getTamanho() {
-		return n;
+	public String retornaTextoOriginal() {
+		return "";
 	}
 
-	// 1) a. i.
-	public void transferePilha(PilhaGenerica<T> p) {
-		if (!p.vazia()) {
-			PilhaGenerica<T> pilhaAux = new PilhaGenerica<>(p.getTamanho());
-
-			while (!p.vazia()) {
-				pilhaAux.push(p.pop());
-			}
-			while (!pilhaAux.vazia()) {
-				p.push(pilhaAux.pop());
-			}
-		}
-	}
-
-	// 1) a. ii.
-	public void transferePilhaRecursivo(PilhaGenerica<T> p) {
-		if (!p.vazia()) {
-			this.push(p.pop());
-			transferePilhaRecursivo(p);
-		}
-	}
-
-	// 1) b
-	public void revertePilha() {
-		PilhaGenerica<T> auxiliar = new PilhaGenerica<>(this.n);
-		while (!this.vazia()) {
-			auxiliar.push(this.pop());
-		}
-		System.out.println("Pilha invertida: " + auxiliar.getVetor());
+	public String retornaTexto() {
+		return "";
 	}
 }
