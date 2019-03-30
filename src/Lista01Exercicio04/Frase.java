@@ -1,4 +1,4 @@
-package L01E04;
+package Lista01Exercicio04;
 
 public class Frase {
 	PilhaGenerica<Pilha> pilhaPalavras;
