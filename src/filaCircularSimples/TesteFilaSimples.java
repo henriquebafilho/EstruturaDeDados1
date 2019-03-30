@@ -2,26 +2,22 @@ package filaCircularSimples;
 
 import java.util.Scanner;
 
-public class TesteFilaSimples extends Fila
-{	
-	public TesteFilaSimples(int tam)
-	{
+public class TesteFilaSimples extends Fila {
+	public TesteFilaSimples(int tam) {
 		super(tam);
 	}
-	
-	public void imprime()
-	{
+
+	public void imprime() {
 		int i, j;
-		
+
 		if (vazia())
 			System.out.println("Fila está vazia.");
 		else
 			for (i = ini, j = 1; j <= n; j = j + 1, i = (i + 1) % tamanho)
 				System.out.println(j + " " + vetor[i]);
 	}
-	
-	public int menu()
-	{
+
+	public int menu() {
 		Scanner scanner = new Scanner(System.in);
 		int escolha;
 
@@ -33,7 +29,7 @@ public class TesteFilaSimples extends Fila
 		System.out.println("0. Fim.");
 		System.out.print("Opcao: ");
 		escolha = scanner.nextInt();
-		
+
 		return escolha;
 	}
 }
