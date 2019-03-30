@@ -1,4 +1,4 @@
-package Lista01Exercicio06;
+package lista01Exercicio06;
 
 import java.util.*;
 

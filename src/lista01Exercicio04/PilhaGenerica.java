@@ -1,4 +1,4 @@
-package Lista01Exercicio04;
+package lista01Exercicio04;
 
 import java.util.Vector;
 

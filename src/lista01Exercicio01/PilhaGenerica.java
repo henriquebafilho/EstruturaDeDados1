@@ -1,4 +1,4 @@
-package Lista01Exercicio06;
+package lista01Exercicio01;
 
 import java.util.Vector;
 
@@ -11,10 +11,6 @@ public class PilhaGenerica<T> {
 		n = tamanho;
 		vetor = new Vector<T>(tamanho);
 		topo = -1;
-	}
-
-	public Vector<T> getVetor() {
-		return vetor;
 	}
 
 	public boolean vazia() {
@@ -57,35 +53,42 @@ public class PilhaGenerica<T> {
 			return false;
 	}
 
-	public void armazenaTexto(String texto) {
-		PilhaGenerica<PilhaGenerica> pilhaPrincipal = new PilhaGenerica<>(texto.length());
+	public Vector<T> getVetor() {
+		return vetor;
+	}
 
-		String[] palavras = texto.split(" ");
+	public int getTamanho() {
+		return n;
+	}
 
-		for (int i = 0; i < palavras.length; i++) {
-			PilhaGenerica<String> pilhaSecundaria = new PilhaGenerica<>(texto.length());
-			while (!pilhaSecundaria.vazia()) {
-				pilhaSecundaria.pop();
+	// 1) a. i.
+	public void transferePilha(PilhaGenerica<T> p) {
+		if (!p.vazia()) {
+			PilhaGenerica<T> pilhaAux = new PilhaGenerica<>(p.getTamanho());
+
+			while (!p.vazia()) {
+				pilhaAux.push(p.pop());
 			}
-			char[] letras = palavras[i].toCharArray();
-			for (char aux : letras) {
-				String letra = Character.toString(aux);
-				pilhaSecundaria.push(letra);
+			while (!pilhaAux.vazia()) {
+				p.push(pilhaAux.pop());
 			}
-			pilhaPrincipal.push(pilhaSecundaria);
-			
-			//mostra as pilhas secundárias com as palavras separadas pro letras
-			System.out.println(pilhaSecundaria.getVetor());
 		}
-		//mostra a pilha principal, cujos elementos são pilhas secundárias
-		System.out.println(pilhaPrincipal.getVetor());
 	}
 
-	public String retornaTextoOriginal() {
-		return "";
+	// 1) a. ii.
+	public void transferePilhaRecursivo(PilhaGenerica<T> p) {
+		if (!p.vazia()) {
+			this.push(p.pop());
+			transferePilhaRecursivo(p);
+		}
 	}
 
-	public String retornaTexto() {
-		return "";
+	// 1) b
+	public void revertePilha() {
+		PilhaGenerica<T> auxiliar = new PilhaGenerica<>(this.n);
+		while (!this.vazia()) {
+			auxiliar.push(this.pop());
+		}
+		System.out.println("Pilha invertida: " + auxiliar.getVetor());
 	}
 }
