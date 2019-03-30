@@ -27,5 +27,10 @@ public class Main {
 				filaMista.insere(f2.remove());
 			}
 		}
+		
+		//Removendo elementos da fila mista (para mostrar como ela estava preenchida)
+		for(int i = 0; i < filaMista.getTamanho(); i++) {
+			System.out.print(filaMista.remove()+" ");
+		}
 	}
 }
