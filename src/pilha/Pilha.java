@@ -80,4 +80,8 @@ public class Pilha
 
 		return elemento;
 	}
+	
+	public int getTamanho() {
+		return n;
+	}
 }
