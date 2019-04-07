@@ -14,10 +14,10 @@ import filaCircularDupla.*;
  * @author Kinoplex
  */
 public class FilaGenerica<T> {
-	private int inicio;
-	private int num;
-	private int tamanho;
-	private Vector<T> vetor;
+	protected int inicio;
+	protected int num;
+	protected int tamanho;
+	protected Vector<T> vetor;
 
 	FilaGenerica(int tamanho) {
 		vetor = new Vector<>(tamanho - 1);
@@ -57,6 +57,14 @@ public class FilaGenerica<T> {
 			return true;
 		}
 		return false;
+	}
+
+	public static FilaDupla converteFila(Fila fila) { 
+		FilaDupla filaDupla = new FilaDupla(fila.tamanho);
+		filaDupla.ini = fila.ini;
+		filaDupla.vetor = fila.vetor;
+		filaDupla.n = fila.n;
+		return filaDupla;
 	}
 
 }

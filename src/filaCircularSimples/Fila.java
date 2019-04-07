@@ -4,10 +4,10 @@ import filaCircularDupla.FilaDupla;
 
 public class Fila {
 	/* Atributos protected para serem usados na subclasse. */
-	protected int tamanho; /* Tamanho do vetor */
-	protected int[] vetor; /* Vetor de elementos */
-	protected int ini; /* Posicao do proximo elemento a ser retirado */
-	protected int n; /* Numero de elementos na fila */
+	public int tamanho; /* Tamanho do vetor */
+	public int[] vetor; /* Vetor de elementos */
+	public int ini; /* Posicao do proximo elemento a ser retirado */
+	public int n; /* Numero de elementos na fila */
 
 	public Fila(int tam) {
 		tamanho = tam;
@@ -53,4 +53,5 @@ public class Fila {
 	public int getTamanho() {
 		return tamanho;
 	}
+
 }
