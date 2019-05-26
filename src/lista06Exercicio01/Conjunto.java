@@ -1,36 +1,36 @@
 package lista06Exercicio01;
 
-public class ConjGenerico<T extends Comparable<T>> {
+public class Conjunto {
 	private Elo prim; /* Referência para primeiro elemento. */
-	private T maior;
-	private T menor;
+	private Elo maior;
+	private Elo menor;
 
 	/* Classe auxiliar para guardar cada elemento do conjunto. */
 	private class Elo {
-		T dado;
+		int dado;
 		Elo prox;
 
 		public Elo() {
 			prox = null;
 		}
 
-		public Elo(T elem) {
+		public Elo(int elem) {
 			dado = elem;
 			prox = null;
 		}
 
-		public Elo(T elem, Elo prox_elem) {
+		public Elo(int elem, Elo prox_elem) {
 			dado = elem;
 			prox = prox_elem;
 		}
 	}
 
-	public ConjGenerico() {
+	public Conjunto() {
 		prim = null;
 	}
 
 	/* Função privada para realizar uma cópia de um outro conjunto. */
-	private void copia(ConjGenerico<T> cj2) {
+	private void copia(Conjunto cj2) {
 		Elo ult = null, q;
 
 		prim = null;
@@ -52,7 +52,7 @@ public class ConjGenerico<T extends Comparable<T>> {
 	}
 
 	/* Simula uma sobrecarga do operador de atribuição. */
-	public ConjGenerico<T> atribui(ConjGenerico<T> cj2) {
+	public Conjunto atribui(Conjunto cj2) {
 		if (this != cj2) {
 			apaga();
 			copia(cj2);
@@ -66,13 +66,13 @@ public class ConjGenerico<T extends Comparable<T>> {
 	}
 
 	/* Teste de pertinência. Usa fato de estar ordenado */
-	public boolean pertence(T valor) {
+	public boolean pertence(int valor) {
 		Elo p;
 
-		for (p = prim; ((p != null) && (p.dado.compareTo(valor) < 0)); p = p.prox)
+		for (p = prim; ((p != null) && (p.dado < valor)); p = p.prox)
 			;
 
-		if ((p == null) || (p.dado.compareTo(valor) > 0))
+		if ((p == null) || (p.dado > valor))
 			return false;
 
 		return true;
@@ -82,30 +82,30 @@ public class ConjGenerico<T extends Comparable<T>> {
 	 * Inserção de elemento no conjunto. Usa fato de estar ordenado. Retorna false
 	 * se elemento já estava lá.
 	 */
-	public boolean insere(T valor) {
+	public boolean insere(int valor) {
 		Elo p = prim, ant = null;
 
 		for (p = prim; (p != null); p = p.prox) {
-			if (p.dado.compareTo(valor) == 0)
+			if (p.dado == valor)
 				return false;
-			if (p.dado.compareTo(valor) > 0)
+			if (p.dado > valor)
 				break;
 			ant = p;
 		}
 		Elo q = new Elo(valor);
-		if (p == prim)
+		if (p == prim) {
 			prim = q;
-		else
+			maior = q;
+			menor = q;
+		} else {
+			if (q.dado > maior.dado) {
+				maior = q;
+			} else if (q.dado < menor.dado) {
+				menor = q;
+			}
 			ant.prox = q;
-		q.prox = p;
-		
-		//Declarando se é maior ou não
-		if(tamanho() == 1) {
-			maior = valor;
-		} else if(valor > maior) {
-			maior = valor;
+			q.prox = p;
 		}
-		
 		return true;
 	}
 
@@ -113,13 +113,13 @@ public class ConjGenerico<T extends Comparable<T>> {
 	 * Remoção de elemento do conjunto. Usa fato de estar ordenado. Retorna false se
 	 * elemento não estava lá.
 	 */
-	public boolean remove(T valor) {
+	public boolean remove(int valor) {
 		Elo p = prim, ant = null;
 
 		for (p = prim; (p != null); p = p.prox) {
-			if (p.dado.compareTo(valor) > 0)
+			if (p.dado > valor)
 				return false;
-			if (p.dado.compareTo(valor) == 0)
+			if (p.dado == valor)
 				break;
 			ant = p;
 		}
@@ -128,6 +128,11 @@ public class ConjGenerico<T extends Comparable<T>> {
 		if (p == prim)
 			prim = prim.prox;
 		else
+			if(p == maior) {
+				maior = ant;
+			} else if (p == menor) {
+				menor = p.prox;
+			}
 			ant.prox = p.prox;
 
 		p = null;
@@ -139,12 +144,12 @@ public class ConjGenerico<T extends Comparable<T>> {
 	 * com a união. Usa fato de conjuntos estarem ordenados e percorre as listas em
 	 * paralelo.
 	 */
-	public ConjGenerico<T> uniao(ConjGenerico<T> cj2) {
+	public Conjunto uniao(Conjunto cj2) {
 		Elo q, p1 = prim, p2 = cj2.prim, ult = null;
-		ConjGenerico<T> uniao = new ConjGenerico<T>();
+		Conjunto uniao = new Conjunto();
 
 		while ((p1 != null) || (p2 != null)) {
-			if ((p1 != null) && ((p2 == null) || (p1.dado.compareTo(p2.dado) < 0))) {
+			if ((p1 != null) && ((p2 == null) || (p1.dado < p2.dado))) {
 				q = new Elo(p1.dado);
 				p1 = p1.prox;
 			} else {
@@ -170,14 +175,14 @@ public class ConjGenerico<T extends Comparable<T>> {
 	 * retorna novo conjunto com a intersecao. Usa fato de conjuntos estarem
 	 * ordenados e percorre as listas em paralelo.
 	 */
-	public ConjGenerico<T> intersecao(ConjGenerico<T> cj2) {
+	public Conjunto intersecao(Conjunto cj2) {
 		Elo q, p1 = prim, p2 = cj2.prim, ult = null;
-		ConjGenerico<T> inter = new ConjGenerico<T>();
+		Conjunto inter = new Conjunto();
 
 		while ((p1 != null) && (p2 != null)) {
-			if (p1.dado.compareTo(p2.dado) < 0) {
+			if (p1.dado < p2.dado) {
 				p1 = p1.prox;
-			} else if (p2.dado.compareTo(p1.dado) < 0) {
+			} else if (p2.dado < p1.dado) {
 				p2 = p2.prox;
 			} else {
 				q = new Elo(p1.dado);
@@ -215,12 +220,12 @@ public class ConjGenerico<T extends Comparable<T>> {
 		System.out.println();
 	}
 
-	public T retornaMenor(ConjGenerico<T> conjunto) {
-		return maior;
+	public int retornaMenor(Conjunto conjunto) {
+		return maior.dado;
 	}
 
-	public T retornaMaior(ConjGenerico<T> conjunto) {
-		return menor;
+	public int retornaMaior(Conjunto conjunto) {
+		return menor.dado;
 	}
-	
+
 }

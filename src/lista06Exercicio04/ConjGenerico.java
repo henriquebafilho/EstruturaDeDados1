@@ -1,4 +1,4 @@
-package lista06Exercicio05;
+package lista06Exercicio04;
 
 public class ConjGenerico<T extends Comparable<T>> {
 	private Elo prim; /* Referência para primeiro elemento. */
@@ -205,23 +205,26 @@ public class ConjGenerico<T extends Comparable<T>> {
 		System.out.println();
 	}
 
-	// Testa se os conjuntos são iguais
-	public boolean igualdadeConjuntos(ConjGenerico<T> conj2) {
-		return igualdadeConjuntos(prim, conj2.prim);
-	}
-
-	private boolean igualdadeConjuntos(Elo p1, Elo p2) {
-		//
-		if (p1 == null ^ p2 == null) {
-			return false;
+	public ConjGenerico<T> diferencaConjunto(ConjGenerico<T> conj2) {
+		// Considera os dois conjuntos ordenados.
+		ConjGenerico<T> diferenca = new ConjGenerico<T>();
+		Elo p = prim, q = conj2.prim;
+		while (p != null) {
+			if (q == null) {
+				diferenca.insere(p.dado);
+				p = p.prox;
+				continue;
+			}
+			if (p.dado.compareTo(q.dado) == 0) {
+				q = q.prox;
+				p = p.prox;
+			} else if (p.dado.compareTo(q.dado) > 0) {
+				q = q.prox;
+			} else if (p.dado.compareTo(q.dado) < 0) {
+				diferenca.insere(p.dado);
+				p = p.prox;
+			}
 		}
-		if (p1 == null && p2 == null) {
-			return true;
-		}
-		if (p1.dado == p2.dado) {
-			return igualdadeConjuntos(p1, p2);
-		} else {
-			return false;
-		}
+		return diferenca;
 	}
 }

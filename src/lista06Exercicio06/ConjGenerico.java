@@ -1,4 +1,4 @@
-package lista06Exercicio05;
+package lista06Exercicio06;
 
 public class ConjGenerico<T extends Comparable<T>> {
 	private Elo prim; /* Referência para primeiro elemento. */
@@ -205,23 +205,33 @@ public class ConjGenerico<T extends Comparable<T>> {
 		System.out.println();
 	}
 
-	// Testa se os conjuntos são iguais
-	public boolean igualdadeConjuntos(ConjGenerico<T> conj2) {
-		return igualdadeConjuntos(prim, conj2.prim);
+	public ConjGenerico<T> complementar(ConjGenerico<T> universo) throws Exception {
+		// complementar começa igual ao conjunto universo
+		ConjGenerico<T> complementar = universo;
+
+		// Se achar algum dado no conjunto que seja igual ao universo, ele remove do
+		// complementar
+		for (Elo p1 = complementar.prim; p1.prox != null; p1 = p1.prox) {
+			for (Elo p2 = prim; p2 != null; p2 = p2.prox) {
+				if (p1.dado == p2.dado) {
+					complementar.remove(p2.dado);
+				}
+				if (!this.pertence(p2.dado)) {
+					throw new Exception("O dado não está inserido no conjunto universo");
+				}
+			}
+		}
+		return complementar;
 	}
 
-	private boolean igualdadeConjuntos(Elo p1, Elo p2) {
-		//
-		if (p1 == null ^ p2 == null) {
-			return false;
-		}
-		if (p1 == null && p2 == null) {
-			return true;
-		}
-		if (p1.dado == p2.dado) {
-			return igualdadeConjuntos(p1, p2);
-		} else {
-			return false;
-		}
+	public ConjGenerico<T> calculaDeMorgan(ConjGenerico<T> a, ConjGenerico<T> b) throws Exception {
+		ConjGenerico<T> aComplementar = new ConjGenerico<T>();
+		ConjGenerico<T> bComplementar = new ConjGenerico<T>();
+		ConjGenerico<T> universo = new ConjGenerico<T>();
+
+		universo = a.uniao(b);
+		aComplementar = a.complementar(universo);
+		bComplementar = a.complementar(universo);
+		return aComplementar.intersecao(bComplementar);
 	}
 }
