@@ -1,4 +1,4 @@
-package exArvoreBinaria;
+package lista07Exercicio02;
 
 public class Arvbin<T extends Comparable<T>> {
 	private T val; /* Valor armazenado na raiz. */
@@ -195,11 +195,7 @@ public class Arvbin<T extends Comparable<T>> {
 	public Arvbin<T> busca(T valor) {
 		Arvbin<T> ret;
 
-		System.out.println("valor atual: " + val);
-
-		/*
-		 * Se é igual ao valor armazenado, não precisa procurar mais. O nó é a raiz.
-		 */
+		/* Se é igual ao valor armazenado, não precisa procurar mais. O nó é a raiz. */
 		if (valor.compareTo(val) == 0) {
 			return this;
 		}
@@ -218,50 +214,11 @@ public class Arvbin<T extends Comparable<T>> {
 		if (dir != null)
 			return dir.busca(valor);
 		return null;
-
 	}
 
-	public int contaNosIntervalo(T min, T max) {
-		int contador = 0;
-
-		if (this.val.compareTo(min) >= 0 && this.val.compareTo(max) <= 0) {
-			contador++;
-		}
-
-		int nosEsq = 0, nosDir = 0;
-
-		if (esq != null) {
-			nosEsq = esq.contaNosIntervalo(min, max);
-		}
-
-		if (dir != null) {
-			nosDir = dir.contaNosIntervalo(min, max);
-		}
-
-		return contador + nosDir + nosEsq;
-	}
-
-	public boolean eIgual(Arvbin outra) {
-
-		System.out.println("this: " + val);
-		System.out.println("outra: " + outra.val);
-
-		if (outra.val.compareTo(val) != 0) {
-			System.out.println("deu ruim aqui");
-			return false;
-		}
+	public void delete(T valor) {
+		Arvbin<T> aux = busca(valor);
 		
-		if(esq != null) {
-			if(!esq.eIgual(outra.esq)) {
-				return false;
-			}
-		}
-		
-		if(dir != null) {
-			if(!dir.eIgual(outra.dir)) {
-				return false;
-			}
-		}
-		return true;
+		aux.mostra();
 	}
 }

@@ -21,24 +21,22 @@ public class Main
 				System.out.println();
 				
 		Arvbin<Integer> b1 = new Arvbin<Integer>(1),
-		                b2 = new Arvbin<Integer>(2),
-		                b3 = new Arvbin<Integer>(3,b1,b2),
-		                b4 = new Arvbin<Integer>(4),
-		                b5 = new Arvbin<Integer>(5),
-		                b6 = new Arvbin<Integer>(6),
-		                b7 = new Arvbin<Integer>(7,b5,b6),
-		                b8 = new Arvbin<Integer>(8),
-		                b9 = new Arvbin<Integer>(9),
-		                b10 = new Arvbin<Integer>(10,b8,b9);
-                        
-		                b4.defineEsq(b3);
-		                b4.defineDir(b7);
-		                b4.mostra();
-		                System.out.println();
+		       b2 = new Arvbin<Integer>(2),
+		       b3 = new Arvbin<Integer>(3,b1,b2),
+		       b4 = new Arvbin<Integer>(4),
+		       b5 = new Arvbin<Integer>(5),
+		       b6 = new Arvbin<Integer>(6),
+		       b7 = new Arvbin<Integer>(7,b5,b6),
+		       b8 = new Arvbin<Integer>(8),
+		       b9 = new Arvbin<Integer>(9),
+		       b10 = new Arvbin<Integer>(10,b8,b9);
+               
+		       b4.defineEsq(b3);
+		       b4.defineDir(b7);
+		       b4.mostra();
+		       System.out.println();
 		                
-		 System.out.println(a1.eIgual(b1));
-				
-				
-				
+		       System.out.println(a4.eIgual(b4));
+		       
 	}
 }
