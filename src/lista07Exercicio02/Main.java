@@ -18,7 +18,7 @@ public class Main {
 				a4.mostra();
 				System.out.println();
 
-		       a4.delete(5);
+		       a4.delete(3);
 		       a4.mostra();
 	}
 

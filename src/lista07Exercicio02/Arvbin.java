@@ -219,9 +219,6 @@ public class Arvbin<T extends Comparable<T>> {
 
 	public void delete(T valor) {
 
-		System.out.println("val: " + val);
-		System.out.println("valor: " + valor);
-
 		// Se o valor inserido for a raiz
 		if (val.compareTo(valor) == 0) {
 			esq = null;
@@ -232,15 +229,9 @@ public class Arvbin<T extends Comparable<T>> {
 		else {
 			// Se o valor inserido estiver a esquerda do nó atual
 			if (esq.val == valor) {
-				/*
-				 * Transforma o esquerdo em null e passa o nó à direita para à esquerda, pois um
-				 * nó ter filho à direita, precisa ter um à esquerda
-				 */
 				esq.esq = null;
 				esq.dir = null;
 				esq = null;
-				esq = dir;
-				dir = null;
 			} else if (dir.val == valor) {
 				dir.esq = null;
 				dir.dir = null;
