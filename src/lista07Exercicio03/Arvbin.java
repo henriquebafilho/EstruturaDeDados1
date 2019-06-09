@@ -1,4 +1,4 @@
-package lista07Exercicio02;
+package lista07Exercicio03;
 
 public class Arvbin<T extends Comparable<T>> {
 	private T val; /* Valor armazenado na raiz. */
@@ -192,7 +192,6 @@ public class Arvbin<T extends Comparable<T>> {
 	 * Verifica se um valor está na árvore. Se estiver, retorna um ponteiro para o o
 	 * nó que tem esse valor. Caso contrário, retorna null.
 	 */
-
 	public Arvbin<T> busca(T valor) {
 		Arvbin<T> ret;
 
@@ -216,31 +215,53 @@ public class Arvbin<T extends Comparable<T>> {
 			return dir.busca(valor);
 		return null;
 	}
-
-	public void delete(T valor) {
-		// Se o valor inserido for a raiz
-		if (val.compareTo(valor) == 0) {
-			esq = null;
-			dir = null;
-			val = null;
+	
+	public boolean eFolha(Arvbin no) {
+		if (no.esq == null && no.dir == null) {
+			return true;
 		}
-		else {
-			// Se o valor inserido estiver a esquerda do nó atual
-			if (esq.val == valor) {
-				esq.esq = null;
-				esq.dir = null;
-				esq = null;
-			} else if (dir.val == valor) {
-				dir.esq = null;
-				dir.dir = null;
-				dir = null;
-			} else {
-				try {
-					esq.delete(valor);	
-				} catch(Exception e) {
-					dir.delete(valor);
-				}
-			}
+		return false;
+	}
+
+	public void tornaRaiz(T valor) {
+		T raiz = this.val;
+		T resultado = this.tornaRaizRecursivo(valor, raiz);
+
+		if (resultado.compareTo(valor) == 0) {
+			this.val = resultado;
+			System.out.println("deu certo");
+		} else {
+			System.out.println("deu errado");
+		}
+
+	}
+
+	public T tornaRaizRecursivo(T valor, T raiz) {
+		T esq = null;
+		T dir = null;
+
+		if (eFolha(this)) {
+			return null;
+		}
+
+		if (this.val.compareTo(valor) == 0) {
+			this.val = raiz;
+			return valor;
+		}
+		
+		if (this.esq != null) {
+			esq = this.esq.tornaRaizRecursivo(valor, raiz);
+		}
+		
+		if (this.dir != null) {
+			dir = this.dir.tornaRaizRecursivo(valor, raiz);
+		}
+
+		if (esq.compareTo(valor) == 0 || dir.compareTo(valor) == 0) {
+			return valor;
+		} else {
+			return null;
 		}
 	}
+
 }
