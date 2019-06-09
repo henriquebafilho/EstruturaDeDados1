@@ -250,18 +250,40 @@ public class Arvbin<T extends Comparable<T>> {
 			System.out.println("deu ruim aqui");
 			return false;
 		}
-		
-		if(esq != null) {
-			if(!esq.eIgual(outra.esq)) {
+
+		if (esq != null) {
+			if (!esq.eIgual(outra.esq)) {
 				return false;
 			}
 		}
-		
-		if(dir != null) {
-			if(!dir.eIgual(outra.dir)) {
+
+		if (dir != null) {
+			if (!dir.eIgual(outra.dir)) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	public boolean eFolha(Arvbin no) {
+		if (no.esq == null && no.dir == null) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean ArvoreSoma(Arvbin<Integer> arvore) {
+		int arvEsq = arvore.calculaSoma(arvore.esq), arvDir = arvore.calculaSoma(arvore.dir);
+
+		System.out.println("arvEsq: " + arvEsq);
+		System.out.println("arvDir: " + arvDir);
+		System.out.println("arvore.val: " + arvore.val);
+
+		if (!arvore.eFolha(arvore)) {
+			if (arvore.val == arvEsq + arvDir) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
