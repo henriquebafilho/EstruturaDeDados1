@@ -1,0 +1,239 @@
+package lista08;
+
+public class Referencia <extends Comparable<T>>{
+
+  private int prioridade;
+  private String acao;  
+  
+
+public int compareTo(Referencia heapref){
+    
+    if(this.prioridade > heapref.getPrioridade()){
+      return 1;
+    }
+  	if(this.prioridade == heapref.getPrioridade()){
+      return 0;
+    }
+  	if(this.prioridade < heapref.getPrioridade()){
+      return -1;
+    }
+    
+  }
+
+  public int getPrioridade() {
+
+      return this.prioridade;
+
+  }
+  
+  public String getAcao() {
+    
+    return acao;
+    
+  }
+  
+}
+
+
+public class ReferenciaSO extends Referencia{
+  
+    public ReferenciaSO(int prio, String acao){
+
+        prioridade = 1000 + prio;
+        this.acao = acao;
+    }
+
+}
+
+
+public class ReferenciaAPP extends Referencia{
+
+    public ReferenciaAPP(int prio, String acao){
+      
+      prioridade = prio;
+    	this.acao = acao;
+    }
+}
+
+public class BinMaxHeap<T>{
+	private int n;               /* Numero de elementos no heap. */   
+	private int tam;             /* Tamanho máximo do heap. */
+	private T[] vetor;          /* Vetor com elementos. */
+
+	/* Constrói heap vazio. */
+	public BinMaxHeap(int tamanho){
+		n = 0;
+		tam = tamanho;
+		vetor = new T[tamanho+1];
+	}
+
+	/* Constrói heap a partir de vetor v. */
+	public BinMaxHeap(int tamanho, int[] v){
+		tam = tamanho;
+		vetor = new T[tamanho+1];
+		n = tamanho;
+
+		for( int i = 0; i < tamanho; i++ )
+			vetor[ i + 1 ] = v[ i ];
+
+		constroiHeap();
+	}
+
+	/* Testa se a fila de prioridade está logicamente vazia.
+	   Retorna true se vazia, false, caso contrário. */
+	public boolean vazia(){
+		return n == 0;
+	}
+
+	/* Faz a lista de prioridades logicamente vazia. */
+	public void fazVazia(){
+		n = 0;
+	}
+
+	/* Imprime os elementos da heap. */
+	public void imprime(){
+		for(int i = 1; i <= n; i++)
+			System.out.print(vetor[i] + " ");
+
+		System.out.println();
+	}
+
+	/* Busca o maior item na fila de prioridades.
+	   Retorna o maior item em itemMin e true, ou falso se a heap estiver vazia. */
+	public int max(){
+		if (this.vazia()){
+			System.out.println("Fila de prioridades vazia!");
+			return Integer.MAX_VALUE;
+		}
+
+		return vetor[1];
+	}
+
+	/* Remove o menor item da fila de prioridades. */
+	/*public void removeMin()
+	{
+		if(this.vazia())
+		{
+			System.out.println("Fila de prioridades vazia!");
+			return;
+		}
+
+		vetor[1] = vetor[n];
+		n--;
+		refaz(1, n);
+	}*/
+
+	/* Remove o menor item da lista de prioridades e coloca ele em itemMin. */
+	public int removeMin()
+	{
+		int itemMin;
+		
+		if(this.vazia())
+		{
+			System.out.println("Fila de prioridades vazia!");
+			return Integer.MAX_VALUE;
+		}
+
+		itemMin = vetor[1];
+		vetor[1] = vetor[n];
+		n--;
+		refaz(1);
+		
+		return itemMin;
+	}
+
+	/* Método auxiliar que estabelece a propriedade de ordem do heap a 
+	 * partir de um vetor arbitrário dos itens. */
+	private void constroiHeap()
+	{
+		/* As posições n até a posição (n / 2) + 1 já constituem uma heap,
+		 * pois são folhas. */
+		for( int i = n / 2; i > 0; i-- )
+			refaz(i);
+	}
+
+	/* Método auxiliar para restaurar a propriedade de heap que
+	 * não está sendo respeitada pelo nó i. */
+	private void refaz(int i)
+	{
+		int x = vetor[ i ];
+
+		while(2*i <= n)
+		{
+			int filhoEsq, filhoDir, maiorFilho;
+			
+			filhoEsq = 2*i;
+			filhoDir = 2*i + 1;
+			
+			/* Por enquanto, o maior filho é o da esquerda. */
+			maiorFilho = filhoEsq;
+			
+			/* Verifica se o filho direito existe e, caso positivo, verifica
+			 * se é maior que o filho esquerdo. */
+			if((filhoEsq != n) && (vetor[ filhoDir ].compareTo(vetor[ filhoEsq ])>=1))
+				maiorFilho = filhoDir;
+
+			if(vetor[ maiorFilho ].compareTo(x) >= 1)
+				vetor [ i ] = vetor[ maiorFilho ];
+			else
+				break;
+			
+			/* Como o elemento x que estava na posição "i" desceu para o nível de baixo, a próxima
+			 * iteração vai verificar a possibilidade de trocar esse elemento x (agora na 
+			 * posição "maiorFilho") com um de seus novos filhos. */
+			i = maiorFilho;
+		}
+		
+		vetor[ i ] = x;
+	}
+
+	/* Insere item x na fila de prioridade, mantendo a propriedade do heap.
+	 * São permitidas duplicatas. */
+	public void insere(int x)
+	{
+		if (tam == n)
+		{
+			System.out.println("Fila de prioridades cheia!");
+			return;
+		}
+
+		/* O elemento é inicialmente inserido na primeira posição disponível
+		 * na árvore, considerando de cima para baixo, da esquerda para a direita. */
+		n++;
+		int pos = n;
+		
+		/* Sentinela utilizada para tratar o caso do pai do nó raiz (de índice 1). */
+		vetor[0] = x;
+
+		/* Refaz heap (sobe elemento). */
+		while(x.compareTo(vetor[pos/2])>0)
+		{
+			vetor[pos] = vetor[ pos/2 ];
+			pos /= 2;
+		}
+		
+		vetor[pos] = x;
+	}
+
+	/* Implementa o algoritmo de ordenação Heapsort. */
+	public void heapsort()
+	{
+		int x;           
+		int resta = n;
+		int raiz = 1;
+		constroiHeap();
+		
+		while (resta > 1)
+		{
+			x = vetor[raiz];
+			vetor[raiz] = vetor[resta];
+			vetor[resta] = x;
+			resta--;
+			refaz(raiz);
+		}
+	}
+	
+}
+
+
+
