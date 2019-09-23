@@ -1,5 +1,3 @@
-package lista08;
-
 public boolean transformaHeapMaxima(Arvbin<Integer> arvore) throws Exception{
 		boolean retorno = this.transformaArvorePrivada(arvore);
 		if(retorno) {
@@ -7,12 +5,12 @@ public boolean transformaHeapMaxima(Arvbin<Integer> arvore) throws Exception{
 			return retorno;
 		}
 		this.fazVazia();
-		throw new Exception("A ·rvore n„o È completa");
+		throw new Exception("A √°rvore n√£o √© completa");
 		
 	}
 	
 	private boolean transformaArvorePrivada(Arvbin<Integer> arv) {
-		//Se ambos os nÛs s„o nulo È folha
+		//Se ambos os n√≥s s√£o nulo √© folha
 		if(arv.retornaDir() == null && arv.retornaEsq() == null) {
 			this.insere(arv.retornaVal());
 			return true;

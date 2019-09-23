@@ -88,9 +88,7 @@ public class VetorCaracteristico {
 
 		this.vetor[elem] = true;
 		this.tamanho++;
-
 		return true;
-
 	}
 
 	// Remover elemento

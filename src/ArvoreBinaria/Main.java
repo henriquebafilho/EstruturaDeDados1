@@ -1,5 +1,7 @@
 package ArvoreBinaria;
 
+import ArvoreBinariaBusca.ArvBinBusca;
+
 public class Main {
 	public static void main(String[] args) {
 		Arvbin<Integer> a1 = new Arvbin<Integer>(1), a2 = new Arvbin<Integer>(2), a3 = new Arvbin<Integer>(3, a1, a2),
@@ -23,5 +25,19 @@ public class Main {
 		}
 		a4.mostra();
 		System.out.println();
+	
+		//Create BST
+		System.out.println("createBST");
+		int n = 9;
+				
+		int[] vetor = new int[n];
+		for(int i = 0; i < n; i++) {
+			vetor[i] = i+1;
+		}
+				
+		Arvbin<Integer> arvore = new Arvbin<Integer>(vetor[n/2]);
+		arvore = arvore.createBST(vetor, 0, n-1);
+				
+		arvore.mostra();
 	}
 }

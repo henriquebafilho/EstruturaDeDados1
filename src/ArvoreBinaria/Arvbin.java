@@ -1,5 +1,7 @@
 package ArvoreBinaria;
 
+import ArvoreBinariaBusca.ArvBinBusca.No;
+
 public class Arvbin<T extends Comparable<T>> {
 	private T val; /* Valor armazenado na raiz. */
 
@@ -215,4 +217,16 @@ public class Arvbin<T extends Comparable<T>> {
 			return dir.busca(valor);
 		return null;
 	}
+
+	public static Arvbin createBST(int[] array, int start, int end) {
+    	
+    	if(start > end) return null;
+    	int mid = (start + end)/2;
+    	Arvbin<Integer> root = new Arvbin<Integer>(array[mid]);
+    	
+    	root.defineEsq(createBST(array, start, mid-1));
+    	root.defineDir(createBST(array, mid+1, end));
+    	
+    	return root;
+    }
 }

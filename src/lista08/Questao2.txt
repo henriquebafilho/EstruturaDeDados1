@@ -1,5 +1,3 @@
-package lista08;
-
 public BinMinHeap(BinMaxHeap heap) {
 		
 		n = 0;

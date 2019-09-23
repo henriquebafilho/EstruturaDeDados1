@@ -1,5 +1,3 @@
-package lista08;
-
 public class Referencia <extends Comparable<T>>{
 
   private int prioridade;
@@ -57,17 +55,17 @@ public class ReferenciaAPP extends Referencia{
 
 public class BinMaxHeap<T>{
 	private int n;               /* Numero de elementos no heap. */   
-	private int tam;             /* Tamanho m·ximo do heap. */
+	private int tam;             /* Tamanho m√°ximo do heap. */
 	private T[] vetor;          /* Vetor com elementos. */
 
-	/* ConstrÛi heap vazio. */
+	/* Constr√≥i heap vazio. */
 	public BinMaxHeap(int tamanho){
 		n = 0;
 		tam = tamanho;
 		vetor = new T[tamanho+1];
 	}
 
-	/* ConstrÛi heap a partir de vetor v. */
+	/* Constr√≥i heap a partir de vetor v. */
 	public BinMaxHeap(int tamanho, int[] v){
 		tam = tamanho;
 		vetor = new T[tamanho+1];
@@ -79,8 +77,8 @@ public class BinMaxHeap<T>{
 		constroiHeap();
 	}
 
-	/* Testa se a fila de prioridade est· logicamente vazia.
-	   Retorna true se vazia, false, caso contr·rio. */
+	/* Testa se a fila de prioridade est√° logicamente vazia.
+	   Retorna true se vazia, false, caso contr√°rio. */
 	public boolean vazia(){
 		return n == 0;
 	}
@@ -142,18 +140,18 @@ public class BinMaxHeap<T>{
 		return itemMin;
 	}
 
-	/* MÈtodo auxiliar que estabelece a propriedade de ordem do heap a 
-	 * partir de um vetor arbitr·rio dos itens. */
+	/* M√©todo auxiliar que estabelece a propriedade de ordem do heap a 
+	 * partir de um vetor arbitr√°rio dos itens. */
 	private void constroiHeap()
 	{
-		/* As posiÁıes n atÈ a posiÁ„o (n / 2) + 1 j· constituem uma heap,
-		 * pois s„o folhas. */
+		/* As posi√ß√µes n at√© a posi√ß√£o (n / 2) + 1 j√° constituem uma heap,
+		 * pois s√£o folhas. */
 		for( int i = n / 2; i > 0; i-- )
 			refaz(i);
 	}
 
-	/* MÈtodo auxiliar para restaurar a propriedade de heap que
-	 * n„o est· sendo respeitada pelo nÛ i. */
+	/* M√©todo auxiliar para restaurar a propriedade de heap que
+	 * n√£o est√° sendo respeitada pelo n√≥ i. */
 	private void refaz(int i)
 	{
 		int x = vetor[ i ];
@@ -165,11 +163,11 @@ public class BinMaxHeap<T>{
 			filhoEsq = 2*i;
 			filhoDir = 2*i + 1;
 			
-			/* Por enquanto, o maior filho È o da esquerda. */
+			/* Por enquanto, o maior filho √© o da esquerda. */
 			maiorFilho = filhoEsq;
 			
 			/* Verifica se o filho direito existe e, caso positivo, verifica
-			 * se È maior que o filho esquerdo. */
+			 * se √© maior que o filho esquerdo. */
 			if((filhoEsq != n) && (vetor[ filhoDir ].compareTo(vetor[ filhoEsq ])>=1))
 				maiorFilho = filhoDir;
 
@@ -178,9 +176,9 @@ public class BinMaxHeap<T>{
 			else
 				break;
 			
-			/* Como o elemento x que estava na posiÁ„o "i" desceu para o nÌvel de baixo, a prÛxima
-			 * iteraÁ„o vai verificar a possibilidade de trocar esse elemento x (agora na 
-			 * posiÁ„o "maiorFilho") com um de seus novos filhos. */
+			/* Como o elemento x que estava na posi√ß√£o "i" desceu para o n√≠vel de baixo, a pr√≥xima
+			 * itera√ß√£o vai verificar a possibilidade de trocar esse elemento x (agora na 
+			 * posi√ß√£o "maiorFilho") com um de seus novos filhos. */
 			i = maiorFilho;
 		}
 		
@@ -188,7 +186,7 @@ public class BinMaxHeap<T>{
 	}
 
 	/* Insere item x na fila de prioridade, mantendo a propriedade do heap.
-	 * S„o permitidas duplicatas. */
+	 * S√£o permitidas duplicatas. */
 	public void insere(int x)
 	{
 		if (tam == n)
@@ -197,12 +195,12 @@ public class BinMaxHeap<T>{
 			return;
 		}
 
-		/* O elemento È inicialmente inserido na primeira posiÁ„o disponÌvel
-		 * na ·rvore, considerando de cima para baixo, da esquerda para a direita. */
+		/* O elemento √© inicialmente inserido na primeira posi√ß√£o dispon√≠vel
+		 * na √°rvore, considerando de cima para baixo, da esquerda para a direita. */
 		n++;
 		int pos = n;
 		
-		/* Sentinela utilizada para tratar o caso do pai do nÛ raiz (de Ìndice 1). */
+		/* Sentinela utilizada para tratar o caso do pai do n√≥ raiz (de √≠ndice 1). */
 		vetor[0] = x;
 
 		/* Refaz heap (sobe elemento). */
@@ -215,7 +213,7 @@ public class BinMaxHeap<T>{
 		vetor[pos] = x;
 	}
 
-	/* Implementa o algoritmo de ordenaÁ„o Heapsort. */
+	/* Implementa o algoritmo de ordena√ß√£o Heapsort. */
 	public void heapsort()
 	{
 		int x;           

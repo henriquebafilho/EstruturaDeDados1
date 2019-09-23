@@ -6,7 +6,7 @@ public class ArvBinBusca<Chave extends Comparable<Chave>, Valor>
 {
 	private No raiz; /* Raiz da árvore. */
 
-	private class No
+	public class No
 	{
 		private Chave chave; /* Chave usada nas comparações. */
 		private Valor valor; /* Informação armazenada. */
